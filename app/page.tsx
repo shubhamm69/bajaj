@@ -15,7 +15,7 @@ export default function Home() {
   const [selectedOptions, setSelectedOptions] = useState<any>([]);
 
   if (typeof window !== "undefined") {
-    document.title = "ABCD123";
+    document.title = "ABCD123"; // Replace with your actual roll number
   }
 
   const handleSubmit = async () => {
@@ -57,36 +57,47 @@ export default function Home() {
     }, {});
   
     return (
-      <div>
+      <div className="text-black" style={{ marginTop: '20px', backgroundColor: '#f9f9f9', padding: '15px', borderRadius: '8px' }}>
         {filteredResponse.alphabets && (
-          <p>Alphabets: {filteredResponse.alphabets}</p>
+          <p><strong>Alphabets:</strong> {filteredResponse.alphabets}</p>
         )}
         {filteredResponse.numbers && (
-          <p>Numbers: {filteredResponse.numbers}</p>
+          <p><strong>Numbers:</strong> {filteredResponse.numbers}</p>
         )}
         {filteredResponse.highest_lowercase_alphabet && (
-          <p>Highest Lowercase Alphabet: {filteredResponse.highest_lowercase_alphabet}</p>
+          <p><strong>Highest Lowercase Alphabet:</strong> {filteredResponse.highest_lowercase_alphabet}</p>
         )}
       </div>
     );
   };
 
   return (
-    <div style={{ padding: '20px' }}>
-      <h1>BFHL API Frontend</h1>
+    <div style={{ padding: '20px', fontFamily: 'Arial, sans-serif', maxWidth: '600px', margin: '0 auto' }}>
+      <h1 style={{ textAlign: 'center', marginBottom: '20px' }}>BFHL API Frontend</h1>
       <textarea
         placeholder='Enter JSON here'
         className="text-black"
         value={jsonInput}
         onChange={(e) => setJsonInput(e.target.value)}
         rows={6}
-        style={{ width: '100%', padding: '10px', fontSize: '16px' }}
+        style={{ width: '100%', padding: '10px', fontSize: '16px', borderRadius: '8px', border: '1px solid #ccc', marginBottom: '10px' }}
       />
-      <button onClick={handleSubmit} style={{ marginTop: '10px', padding: '10px 20px', fontSize: '16px' }}>
+      <button 
+        onClick={handleSubmit} 
+        style={{ 
+          width: '100%', 
+          padding: '12px', 
+          fontSize: '16px', 
+          borderRadius: '8px', 
+          backgroundColor: '#007bff', 
+          color: '#fff', 
+          border: 'none', 
+          cursor: 'pointer' 
+        }}>
         Submit
       </button>
 
-      {error && <p style={{ color: 'red' }}>{error}</p>}
+      {error && <p style={{ color: 'red', marginTop: '10px', textAlign: 'center' }}>{error}</p>}
 
       {response && (
         <>
@@ -96,7 +107,15 @@ export default function Home() {
             className="text-black"
             onChange={handleSelectChange}
             placeholder='Select fields to display...'
-            styles={{ container: (provided:any) => ({ ...provided, marginTop: '20px' }) }}
+            styles={{ 
+              container: (provided: any) => ({ ...provided, marginTop: '20px' }), 
+              control: (provided: any) => ({
+                ...provided,
+                padding: '5px',
+                borderRadius: '8px',
+                borderColor: '#007bff'
+              })
+            }}
           />
           {renderResponse()}
         </>
